@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FOOD_SECURITY" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+    <!-- Style for table rows -->
+    <style name="TableRowStyle">
+        <item name="android:padding">8dp</item>
+        <item name="android:background">#f0f0f0</item>
+    </style>
+
+    <!-- Style for alternate table rows -->
+    <style name="TableRowStyleAlternate">
+        <item name="android:padding">8dp</item>
+        <item name="android:background">#e0e0e0</item>
+    </style>
+
+    <!-- Style for TextView in table -->
+    <style name="TableTextViewStyle">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.FOOD_SECURITY" parent="Base.Theme.FOOD_SECURITY" />
+</resources>
