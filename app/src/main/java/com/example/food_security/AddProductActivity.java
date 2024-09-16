@@ -94,6 +94,9 @@ public class AddProductActivity extends AppCompatActivity {
         // Save product to SQLite
         boolean isInserted = databaseHelper.insertProduct(name, description, expiryDate);
         if (isInserted) {
+            // Schedule notifications for the product
+            NotificationScheduler.scheduleNotifications(this, name, expiryDate);
+
             Toast.makeText(this, "Product Added Successfully", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(AddProductActivity.this, MainActivity.class));
             finish();

@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Notification;
 import androidx.core.app.NotificationCompat;
-
 
 public class NotificationReceiver extends BroadcastReceiver {
 
@@ -26,13 +24,18 @@ public class NotificationReceiver extends BroadcastReceiver {
             notificationManager.createNotificationChannel(channel);
         }
 
-        Intent notificationIntent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // Get notification data from the intent
+        String message = intent.getStringExtra("message");
 
+        // Create an intent for the notification click action
+        Intent notificationIntent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        // Build and show the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, Constants.CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_notification) // Make sure this resource exists
-                .setContentTitle("Product Expiration")
-                .setContentText("One or more products have expired.")
+                .setSmallIcon(R.drawable.ic_notification) // Ensure this resource exists
+                .setContentTitle("Product Expiration Reminder")
+                .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
