@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Permissions -->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Application details -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-
     <uses-permission android:name="android.permission.INTERNET" />
-
 
     <application
         android:allowBackup="true"
@@ -23,22 +21,44 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FOOD_SECURITY"
         tools:targetApi="31">
+
+        <!-- Login Activity as the first (launch) screen -->
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".Displayinformation"
-            android:exported="false" /> <!-- Main Activity -->
-        <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Receiver for notifications -->
-        <receiver android:name=".NotificationReceiver" />
-    </application>
+        </activity>
 
+        <!-- Main Activities -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+
+        <!-- AddProductActivity -->
+        <activity
+            android:name=".AddProductActivity"
+            android:exported="false" />
+
+        <!-- FileProvider for capturing and storing images -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.food_security.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Receiver for notifications -->
+        <receiver android:name=".NotificationReceiver" />
+
+    </application>
 </manifest>
+
